@@ -11,14 +11,22 @@ function drawGrid(size)
     {
         for(let j=0; j<size; j++)
         {
+            let redColorValue = Math.floor(Math.random()*100)%256;
+            let greenColorValue = Math.floor(Math.random()*100)%256;
+            let blueColorValue = Math.floor(Math.random()*100)%256;
+
             let gridbox = document.createElement("div");
 
             gridbox.classList.add("gridbox");
             gridbox.style.width = 960/size + "px";
             gridbox.style.height = 960/size + "px";
+            gridbox.style.opacity = "0.0";
+            gridbox.style.backgroundColor = "rgb("+redColorValue+", "+blueColorValue+", "+greenColorValue+")";
             
             gridbox.addEventListener("mouseover", (e) => {
-                e.target.style.background = "gray";
+                let currentOpac = parseFloat(e.target.style.opacity);
+                if(currentOpac < 1)
+                    e.target.style.opacity = (currentOpac + 0.1).toString();
             });
             
             container.appendChild(gridbox);
